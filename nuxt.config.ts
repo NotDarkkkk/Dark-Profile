@@ -7,9 +7,17 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
   ],
 
+  plugins: [
+    '~/plugins/cursor.ts',
+  ],
+
   ssr: false,
 
   devtools: { enabled: true },
+
+  css: [
+    '~/assets/css/main.css',
+  ],
 
   colorMode: {
     classSuffix: '',
@@ -17,14 +25,6 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2025-02-15',
-
-  plugins: [
-    '~/plugins/cursor.ts'
-  ],
-
-  css: [
-    '~/assets/css/main.css'
-  ],
 
   eslint: {
     checker: true,
