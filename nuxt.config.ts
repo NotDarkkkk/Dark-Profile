@@ -4,7 +4,10 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     '@nuxt/eslint',
+    '@vueuse/nuxt',
   ],
+
+  ssr: false,
 
   devtools: { enabled: true },
 
@@ -14,6 +17,14 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2025-02-15',
+
+  plugins: [
+    '~/plugins/cursor.ts'
+  ],
+
+  css: [
+    '~/assets/css/main.css'
+  ],
 
   eslint: {
     checker: true,

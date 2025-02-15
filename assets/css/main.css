@@ -1,0 +1,26 @@
+/* Custom Cursor Styles */
+html {
+    cursor: none; 
+  }
+  
+  body {
+    cursor: none; 
+    overflow: hidden;
+  }
+  
+  .custom-cursor {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #7f7f7f;
+    border-radius: 50%;
+    pointer-events: none; 
+    z-index: 9999; 
+    transition: transform 0.1s ease-out;
+    transform: translate(-50%, -50%); 
+  }
+  
+  a:hover,
+  button:hover {
+    cursor: none; 
+  }

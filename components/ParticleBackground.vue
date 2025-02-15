@@ -1,7 +1,7 @@
 <template>
   <canvas
     ref="canvas"
-    class="absolute top-0 left-0 w-full h-full bg-gray-100 dark:bg-gray-800 backdrop-blur-sm pointer-events-none"
+    class="absolute top-0 left-0 w-full h-full bg-neutral-300 dark:bg-gray-800 backdrop-blur-sm transition-colors pointer-events-none"
   />
 </template>
 
