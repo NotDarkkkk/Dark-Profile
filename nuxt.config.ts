@@ -1,5 +1,24 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// nuxt.config.ts
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
-  devtools: { enabled: true }
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
+    '@nuxt/eslint',
+  ],
+
+  devtools: { enabled: true },
+
+  colorMode: {
+    classSuffix: '',
+    preference: 'system',
+  },
+
+  compatibilityDate: '2025-02-15',
+
+  eslint: {
+    checker: true,
+    config: {
+      stylistic: true,
+    },
+  },
 })
