@@ -1,26 +1,46 @@
-/* Custom Cursor Styles */
 html {
-    cursor: none; 
-  }
-  
-  body {
-    cursor: none; 
-    overflow: hidden;
-  }
-  
-  .custom-cursor {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background-color: #7f7f7f;
-    border-radius: 50%;
-    pointer-events: none; 
-    z-index: 9999; 
-    transition: transform 0.1s ease-out;
-    transform: translate(-50%, -50%); 
-  }
-  
-  a:hover,
-  button:hover {
-    cursor: none; 
-  }
+  cursor: none;
+  scrollbar-width: none;
+  scrollbar-color: rgba(125, 125, 125, 0.5) transparent;
+  overflow-x: hidden; 
+}
+
+body {
+  cursor: none;
+  overflow-x: hidden;
+  width: 100%; 
+  position: absolute; 
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 15px;
+  height: 15px;
+  background-color: #7f7f7f;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease-out;
+  transform: translate(-50%, -50%);
+}
+
+a:hover,
+button:hover {
+  cursor: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(125, 125, 125, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(125, 125, 125, 0.8);
+}

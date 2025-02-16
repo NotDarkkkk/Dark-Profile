@@ -11,36 +11,66 @@ const particles = []
 const mouse = { x: null, y: null, radius: 140 }
 const $colorMode = useColorMode()
 
+const getDocumentHeight = () => {
+  const body = document.body
+  const html = document.documentElement
+
+  return Math.max(
+    body.scrollHeight,
+    body.offsetHeight,
+    html.clientHeight,
+    html.scrollHeight,
+    html.offsetHeight,
+  )
+}
+
 const createParticles = () => {
-  const width = canvas.value.width = window.innerWidth
-  const height = canvas.value.height = window.innerHeight
+  // Set canvas dimensions
+  const width = window.innerWidth
+  const height = getDocumentHeight()
+
+  // Set canvas size with device pixel ratio for sharp rendering
+  const dpr = window.devicePixelRatio || 1
+  canvas.value.width = width * dpr
+  canvas.value.height = height * dpr
+
+  // Scale the canvas CSS dimensions
+  canvas.value.style.width = `${width}px`
+  canvas.value.style.height = `${height}px`
+
+  // Scale the drawing context
+  const ctx = canvas.value.getContext('2d')
+  ctx.scale(dpr, dpr)
 
   particles.length = 0
   const spacing = 60
   const rowHeight = spacing * Math.sqrt(3) / 2
 
-  for (let row = 0; row < height / rowHeight + 1; row += 1) {
+  // Add extra rows above and below viewport for smooth scrolling
+  const extraRows = Math.ceil(window.innerHeight / rowHeight)
+  const totalRows = Math.ceil(height / rowHeight) + extraRows
+
+  for (let row = -extraRows; row < totalRows; row += 1) {
     const offset = row % 2 ? spacing / 2 : 0
-    for (let col = 0; col < width / spacing + 1; col += 1) {
+    for (let col = -1; col < width / spacing + 2; col += 1) {
       const x = col * spacing + offset
       const y = row * rowHeight
 
-      if (x >= -spacing && x <= width + spacing && y >= -spacing && y <= height + spacing) {
-        particles.push({
-          x,
-          y,
-          originalX: x,
-          originalY: y,
-          size: 3,
-          active: false,
-        })
-      }
+      particles.push({
+        x,
+        y,
+        originalX: x,
+        originalY: y,
+        size: 3,
+        active: false,
+      })
     }
   }
 }
 
 const drawParticles = () => {
   const ctx = canvas.value.getContext('2d')
+  const scrollY = window.scrollY
   ctx.clearRect(0, 0, canvas.value.width, canvas.value.height)
 
   const color = $colorMode.value === 'dark' ? '#ffffff' : '#000000'
@@ -65,16 +95,22 @@ const drawParticles = () => {
 
   ctx.fillStyle = `${color}40`
   particles.forEach((p) => {
-    ctx.beginPath()
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-    ctx.fill()
+    // Only draw particles that are within or near the viewport
+    if (p.y >= scrollY - 100 && p.y <= scrollY + window.innerHeight + 100) {
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+      ctx.fill()
+    }
   })
 }
 
 const animateParticles = () => {
+  const scrollY = window.scrollY
+  const mouseY = mouse.y + scrollY // Adjust mouse position for scroll
+
   particles.forEach((p) => {
     const dx = p.x - mouse.x
-    const dy = p.y - mouse.y
+    const dy = p.y - mouseY
     const distance = Math.sqrt(dx * dx + dy * dy)
     p.active = distance < mouse.radius
 
@@ -122,15 +158,28 @@ const updateMousePosition = (event) => {
   mouse.y = event.clientY
 }
 
+// Debounce resize handler
+const debouncedResize = useDebounceFn(() => {
+  createParticles()
+}, 150)
+
 onMounted(() => {
   createParticles()
   animate()
   window.addEventListener('mousemove', updateMousePosition)
-  window.addEventListener('resize', createParticles)
+  window.addEventListener('resize', debouncedResize)
+  window.addEventListener('scroll', () => {
+    // Only recreate particles if the document height has changed
+    const currentHeight = getDocumentHeight()
+    if (currentHeight !== canvas.value.height) {
+      createParticles()
+    }
+  })
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('mousemove', updateMousePosition)
-  window.removeEventListener('resize', createParticles)
+  window.removeEventListener('resize', debouncedResize)
+  window.removeEventListener('scroll', () => {})
 })
 </script>

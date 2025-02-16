@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col md:flex-row items-center justify-center px-6">
+  <section class="flex flex-col md:flex-row items-center items-center justify-center px-6">
     <ProfileCard />
     <AboutMe />
   </section>

@@ -1,24 +1,28 @@
 <template>
   <header
     ref="headerRef"
-    class="p-4 bg-neutral-400/80 dark:bg-gray-900/80 backdrop-blur flex justify-between items-center transition-all duration-500 relative group"
+    class="p-4 bg-neutral-400/80 dark:bg-gray-900/80 backdrop-blur flex justify-between items-center transition-all duration-500 relative group overflow-hidden"
     @mousemove="updateGlowPosition"
     @mouseleave="resetGlow"
   >
-    <div
-      class="absolute bottom-0 h-[3px] pointer-events-none transition-all duration-700 ease-out"
-      :style="{
-        left: `${glowPosition}px`,
-        width: '600px',
-        transform: 'translateX(-50%)',
-        background: 'radial-gradient(circle, #7b1fa2 0%, transparent 70%)',
-        opacity: isHovering ? '1' : '0',
-      }"
-    />
+    <!-- Glow effect container -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+      <div
+        class="absolute bottom-0 h-[3px] transition-all duration-700 ease-out"
+        :style="{
+          left: `${glowPosition}px`,
+          width: '100%',
+          maxWidth: '600px',
+          transform: 'translateX(-50%)',
+          background: 'radial-gradient(circle, #7b1fa2 0%, transparent 70%)',
+          opacity: isHovering ? '1' : '0',
+        }"
+      />
 
-    <div
-      class="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-700 to-transparent opacity-0 group-hover:opacity-50 transition-all duration-700 ease-out blur-sm"
-    />
+      <div
+        class="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-purple-700 to-transparent opacity-0 group-hover:opacity-50 transition-all duration-700 ease-out blur-sm"
+      />
+    </div>
 
     <h1 class="text-xl font-bold text-gray-900 dark:text-white relative">
       Dark
