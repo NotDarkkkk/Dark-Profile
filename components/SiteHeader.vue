@@ -25,7 +25,10 @@
     </div>
 
     <h1 class="text-xl font-bold text-gray-900 dark:text-white relative">
-      Dark
+      <a
+        href="https://github.com/Notdarkkkk"
+        class="hover:underline cursor-none"
+      >Dark</a>
     </h1>
 
     <button
