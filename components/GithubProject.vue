@@ -20,7 +20,8 @@
             v-if="project.image"
             :src="project.image"
             :alt="project.name"
-            class="w-full h-32 object-cover rounded-md"
+            class="w-full h-32 object-cover rounded-md cursor-none"
+            @click="selectedImage = project.image"
           >
           <a
             :href="project.weblink"
@@ -36,16 +37,26 @@
             target="_blank"
             class="inline-block mt-auto text-purple-500 cursor-none hover:underline"
           >
-            View on GitHub
+            {{ project.linkText || 'View on GitHub' }}
           </a>
         </div>
       </div>
+    </div>
+
+    <div 
+      v-if="selectedImage" 
+      class="fixed inset-0 bg-black bg-opacity-80 flex items-center cursor-none justify-center z-50"
+      @click="selectedImage = null"
+    >
+      <img :src="selectedImage" class="max-w-[90%] max-h-[90%] rounded shadow-lg" />
     </div>
   </section>
 </template>
 
 <script setup>
 useMotion()
+
+const selectedImage = ref(null)
 
 const projects = [
   {
@@ -55,30 +66,43 @@ const projects = [
     link: 'http://maze.notdarkkkk.xyz',
     image: 'https://imgur.com/EZQemii.png',
     weblink: 'http://maze.notdarkkkk.xyz',
+    linkText: 'Generate Mazes',
   },
-    {
+  {
     id: 2,
     name: 'Game of Life',
     description: 'A simple Conways Game of Life simulator.',
     link: 'http://gol.notdarkkkk.xyz',
     image: 'https://imgur.com/1i90JJT.png',
     weblink: 'http://gol.notdarkkkk.xyz',
+    linkText: 'Open Game of Life',
   },
   {
     id: 3,
+    name: 'Study Assistant',
+    description: 'A study assistant using Google Vertex AI API',
+    link: 'https://imgur.com/a/wet6IgM',
+    image: 'https://imgur.com/mb1BcOD.png',
+    weblink: 'https://imgur.com/a/wet6IgM',
+    linkText: 'View Demo Images',
+  },
+  {
+    id: 4,
     name: 'Drawing Website',
     description: 'A website using htmls builtin Canvas. Made with Vue.js.',
     link: 'https://github.com/notdarkkkk/DrawingThing',
     image: 'https://imgur.com/qrWL0f8.png',
     weblink: 'http://test.notdarkkkk.xyz',
+    linkText: 'View on Github',
   },
   {
-    id: 4,
+    id: 5,
     name: 'Portfolio Website',
     description: 'Portfolio Website using Nuxt.js and Tailwind.',
     link: 'https://github.com/notdarkkkk/Dark-Profile',
     image: 'https://imgur.com/gAtBxYb.png',
     weblink: 'http://www.notdarkkkk.xyz',
+    linkText: 'View on Github',
   },
 ]
 </script>
