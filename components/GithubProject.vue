@@ -50,6 +50,22 @@ useMotion()
 const projects = [
   {
     id: 1,
+    name: 'Maze Solver',
+    description: 'A maze generator and solver with multiple algorithms.',
+    link: 'http://maze.notdarkkkk.xyz',
+    image: 'https://imgur.com/EZQemii.png',
+    weblink: 'http://maze.notdarkkkk.xyz',
+  },
+    {
+    id: 2,
+    name: 'Game of Life',
+    description: 'A simple Conways Game of Life simulator.',
+    link: 'http://gol.notdarkkkk.xyz',
+    image: 'https://imgur.com/1i90JJT.png',
+    weblink: 'http://gol.notdarkkkk.xyz',
+  },
+  {
+    id: 3,
     name: 'Drawing Website',
     description: 'A website using htmls builtin Canvas. Made with Vue.js.',
     link: 'https://github.com/notdarkkkk/DrawingThing',
@@ -57,20 +73,12 @@ const projects = [
     weblink: 'http://test.notdarkkkk.xyz',
   },
   {
-    id: 2,
+    id: 4,
     name: 'Portfolio Website',
     description: 'Portfolio Website using Nuxt.js and Tailwind.',
     link: 'https://github.com/notdarkkkk/Dark-Profile',
     image: 'https://imgur.com/gAtBxYb.png',
     weblink: 'http://www.notdarkkkk.xyz',
-  },
-  {
-    id: 3,
-    name: 'WIP Website',
-    description: 'This Website is still in progress.',
-    link: '',
-    image: '',
-    weblink: '',
   },
 ]
 </script>
